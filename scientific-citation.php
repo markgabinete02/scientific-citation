@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Scientific Citation
  * Plugin URI:        https://example.com/plugins/scientific-citation/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       This is a wordpress plugin that lets you generate scientific citations via shortcodes
  * Version:           1.0.0
  * Author:            Mark Gabinete
  * Author URI:        mark-gabinete

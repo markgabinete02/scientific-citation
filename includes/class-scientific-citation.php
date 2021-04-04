@@ -154,8 +154,19 @@ class Scientific_Citation {
 
 		$plugin_admin = new Scientific_Citation_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'scicit_admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'scicit_admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+		/**
+		 * Register admin menu to wordpress admin
+		 */
+		$this->loader->add_action( 'admin_menu' , $plugin_admin, 'scicit_register_admin_menu');
+
+		/**
+		 * Registers Scicit settings
+		 *  */ 
+		$this->loader->add_action('admin_init', $plugin_admin , 'register_scicit_settings');
+
 
 	}
 
@@ -170,9 +181,22 @@ class Scientific_Citation {
 
 		$plugin_public = new Scientific_Citation_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		/**
+		 * Enqueue public styles and scripts
+		 */
+		$this->loader->add_action( 'scicit_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		$this->loader->add_action( 'scicit_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		/**
+		 * 
+		 *  Register shortcode [citation][/citation]
+		 */
+		$this->loader->add_shortcode( 'citation' , $plugin_public, 'scicit_generate_citation');
+
+		/**
+		 * Register filter to add contents after the_content hook 
+		 */
+		$this->loader->add_filter( 'the_content', $plugin_public, 'scicit_generate_citation_list', 20 , 1 );
 	}
 
 	/**

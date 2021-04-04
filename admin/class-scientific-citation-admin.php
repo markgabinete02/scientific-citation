@@ -101,17 +101,44 @@ class Scientific_Citation_Admin {
 	}
 
 	
-		
+
 	/**
-	 * register_admin_menu
+	 * scicit_register_admin_menu
 	 *
-	 * @since    1.0.0
 	 * @return void
 	 */
-	public function register_admin_menu(){
+	public function scicit_register_admin_menu(){
 		add_menu_page( 'Scientific Citation', 'Citations', 'manage_options', 'scientific-citation/settings.php', array($this, 'scientific_admin_page'), "dashicons-admin-links", 250 );
 	}
 
 
+	/**
+	 * scientific_admin_page
+	 *
+	 * @since	1.0.0
+	 * @return scientific citation admin page
+	 */
+	public function scientific_admin_page() {
+		
+		require_once 'partials/scientific-citation-admin-display.php';
+	}
+
+	
+	/**
+	 * register_scicit_settings
+	 * 
+	 * Registers this plugins settings to wordpress
+	 * 
+	 * @since	1.0.0
+	 * @return void
+	 */
+	public function register_scicit_settings() {
+		// Registers all general api settings
+		$args = array(
+            'type' => 'string', 
+            'default' => 'apa',
+            );
+		register_setting( "scicitationSettings", "citation_style", $args );
+	}
 
 }
