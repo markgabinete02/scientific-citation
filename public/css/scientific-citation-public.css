@@ -2,3 +2,14 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+ /* ol list style */
+ol.scicit_ol_list li span b a {
+    color: #0645ad;
+    text-decoration: none;
+    background: none;
+}
+
+ol.scicit_ol_list li {
+    font-size: 0.7em;
+}

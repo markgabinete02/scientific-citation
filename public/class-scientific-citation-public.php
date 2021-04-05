@@ -75,18 +75,9 @@ if ( !class_exists( 'Scientific_Citation_Public' ) ) {
 		public function enqueue_styles() {
 
 			/**
-			 * This function is provided for demonstration purposes only.
-			 *
-			 * An instance of this class should be passed to the run() function
-			 * defined in Scientific_Citation_Loader as all of the hooks are defined
-			 * in that particular class.
-			 *
-			 * The Scientific_Citation_Loader will then create the relationship
-			 * between the defined hooks and the functions defined in this
-			 * class.
+			 * Register public styles only
 			 */
-
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/scientific-citation-public.css', array(), $this->version, 'all' );
+			wp_register_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/scientific-citation-public.css' );
 
 		}
 
@@ -98,18 +89,10 @@ if ( !class_exists( 'Scientific_Citation_Public' ) ) {
 		public function enqueue_scripts() {
 
 			/**
-			 * This function is provided for demonstration purposes only.
-			 *
-			 * An instance of this class should be passed to the run() function
-			 * defined in Scientific_Citation_Loader as all of the hooks are defined
-			 * in that particular class.
-			 *
-			 * The Scientific_Citation_Loader will then create the relationship
-			 * between the defined hooks and the functions defined in this
-			 * class.
+			 * Enqueue public scripts
 			 */
 
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/scientific-citation-public.js', array( 'jquery' ), $this->version, false );
+			// wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/scientific-citation-public.js', array( 'jquery' ), $this->version, false );
 
 		}
 		
@@ -125,7 +108,7 @@ if ( !class_exists( 'Scientific_Citation_Public' ) ) {
 		 * @return string
 		 */
 
-		function scicit_generate_citation($atts, $content = '') {
+		public function scicit_generate_citation($atts, $content = '') {
 			static $superscript=0;
 			static $citation_list = "";
 
@@ -173,7 +156,7 @@ if ( !class_exists( 'Scientific_Citation_Public' ) ) {
 			$linkref = $section_anchor."-ref-".$superscript;
 			$output = "<span><i>".$content."</i><a href='#".$linknote."'><sup id=".$linkref.">[".$superscript."]</sup></a></span>";
 			
-
+			wp_enqueue_style( 'scientific-citation' );
 			// Checks if citation type is for Journal
 			if($attributes['type'] == "Journal"){
 				
@@ -614,16 +597,17 @@ if ( !class_exists( 'Scientific_Citation_Public' ) ) {
 		public function scicit_generate_citation_list( $content) {    
 			
 			$session_array = $this->citation_list;
-			$after_content = "<h3>Referrences</h3><hr>";
+			$after_content = "<div class='scicit_cointainer'><h3 class='scicit_list_title'>Referrences</h3><hr>";
 			if( is_single() ) {
 				
-				$after_content .= "<ol>";
+				$after_content .= "<ol class='scicit_ol_list'>";
 				foreach ($session_array as $key => $value) {
 					$after_content .= $value;
 				}
 				$after_content .= "</ol>";
 				$content .= $after_content;
 			}
+			$content .= "</div>";
 
 			return $content;
 		}

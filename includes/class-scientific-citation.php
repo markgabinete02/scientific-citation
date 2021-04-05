@@ -154,8 +154,8 @@ class Scientific_Citation {
 
 		$plugin_admin = new Scientific_Citation_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'scicit_admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'scicit_admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		/**
 		 * Register admin menu to wordpress admin
@@ -184,11 +184,10 @@ class Scientific_Citation {
 		/**
 		 * Enqueue public styles and scripts
 		 */
-		$this->loader->add_action( 'scicit_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'scicit_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 		/**
-		 * 
 		 *  Register shortcode [citation][/citation]
 		 */
 		$this->loader->add_shortcode( 'citation' , $plugin_public, 'scicit_generate_citation');

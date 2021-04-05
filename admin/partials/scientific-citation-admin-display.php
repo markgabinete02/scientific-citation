@@ -11,6 +11,8 @@
  * @package    Scientific_Citation
  * @subpackage Scientific_Citation/admin/partials
  */
+
+    wp_enqueue_style('scientific-citation');
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
@@ -52,7 +54,7 @@
                 <li>1. Journal <code>[citation type="Journal" authors="" article="" journal-title="" volume="" issueno="" publication-year="" pages=""]Text to be cited[/citation]</code></li>
                 <li>2. Books <code>[citation type="Book" authors="" book-title="" edition="" place-of-publication="" publisher="" publication-year="" ]Text to be cited[/citation]</code></li>
                 <li>3. Magazine <code>[citation type="Magazine" authors="" publication-date="" article="" magazine-title="" volume="" issueno="" pages="" ]Text to be cited[/citation]</code></li>
-                <li>4. Website <code>[citation type="Website" author="" publisher="" webpage-title="" date-of-access="" url="" publication-date="" format=""]Text to be cited[/citation]</code></li>
+                <li>4. Website <code>[citation type="Website" authors="" publisher="" webpage-title="" date-of-access="" url="" publication-date="" format=""]Text to be cited[/citation]</code></li>
             </ul>
 
             <h3>Notes:</h3>
